@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 function App() {
-  // 1. Profile state holding student details
   const [profile, setProfile] = useState({
     name: 'Aarav Sharma',
     rollNumber: 'CS2024-042',
@@ -9,25 +8,19 @@ function App() {
     email: 'aarav.sharma@example.edu',
   });
 
-  // 2. State to toggle between view and edit modes
   const [isEditing, setIsEditing] = useState(false);
-
-  // Temporary state for edits before saving
   const [editForm, setEditForm] = useState({ ...profile });
 
-  // Handle changes within edit inputs
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEditForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Toggle into edit mode with fresh copy of profile
   const handleEditClick = () => {
     setEditForm({ ...profile });
     setIsEditing(true);
   };
 
-  // Save changes and return to view mode
   const handleSave = (e) => {
     e.preventDefault();
     setProfile({ ...editForm });
@@ -35,7 +28,6 @@ function App() {
   };
 
   return (
-    // 3. Responsive card container with sm and md breakpoints
     <div className="w-full max-w-sm sm:max-w-md md:max-w-xl mx-auto bg-white rounded-xl shadow-md p-6 sm:p-8 border border-gray-200">
       <div className="flex items-center justify-between border-b pb-4 mb-4">
         <h2 className="text-xl sm:text-2xl font-bold text-gray-800">
@@ -47,7 +39,6 @@ function App() {
       </div>
 
       {!isEditing ? (
-        // --- VIEW MODE ---
         <div className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm sm:text-base">
             <div>
@@ -68,7 +59,6 @@ function App() {
             </div>
           </div>
 
-          {/* Button to toggle edit mode */}
           <div className="pt-4">
             <button
               onClick={handleEditClick}
@@ -79,7 +69,6 @@ function App() {
           </div>
         </div>
       ) : (
-        // --- EDIT MODE ---
         <form onSubmit={handleSave} className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
@@ -136,7 +125,6 @@ function App() {
             </div>
           </div>
 
-          {/* Action buttons: Save and Cancel */}
           <div className="pt-2 flex flex-col sm:flex-row gap-2">
             <button
               type="submit"
